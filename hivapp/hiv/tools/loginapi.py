@@ -21,12 +21,12 @@ class getUserInfo(object):
         self.grant_type = settings.GRANT_TYPE
         self.api = WXAPPAPI(appid=self.appid, app_secret=self.secret)
 
-    # 获取从服务器请求的code
-    def GetCode(self,request):
-        if request.method == "POST":
-            if request.GET['action'] == 'post_code':
-                code = request.POST.get('code', None)
-                return code
+    # 获取从客户端请求的code
+    def GetCode(self, request):
+        if request.method == "GET":
+            #if request.GET['action'] == 'post_code':
+            code = request.GET.get('code', None)
+            return code
 
     # 使用code换取session_key
     def GetSessionKey(self, code):
@@ -51,10 +51,10 @@ class getUserInfo(object):
     # 从session_info解密得到用户信息
     def UserInfomation(self, request, session_key):
 
-        if request.method == "POST":
+        if request.method == "GET":
             encrypted_data = request.POST.get('encryptedData')
             iv = request.POST.get('iv')
-            signature = request.POST.get('signature')
+            #signature = request.POST.get('signature')
             crypt = WXBizDataCrypt(self.appid, session_key)
 
             user_info = crypt.decrypt(encrypted_data, iv)

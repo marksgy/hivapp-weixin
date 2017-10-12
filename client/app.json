@@ -1,0 +1,43 @@
+{
+	"pages": [
+		"pages/test/main"
+	],
+	"window": {
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#343a40",
+		"navigationBarTitleText": "快检先生",
+		"navigationBarTextStyle": "white"
+	},
+	"tabBar": {
+		"color": "#aaaaaa",
+		"selectedColor": "#64bfa1",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{
+				"pagePath": "pages/my/b5f",
+				"text": "资讯",
+				"iconPath": "images/b5f.png",
+				"selectedIconPath": "images/b5f_hl.png"
+			},
+			{
+				"pagePath": "pages/exam/list",
+				"text": "快检",
+				"iconPath": "images/exam.png",
+				"selectedIconPath": "images/exam_hl.png"
+			},
+			{
+				"pagePath": "pages/consult/list",
+				"text": "咨询",
+				"iconPath": "images/exam.png",
+				"selectedIconPath": "images/exam_hl.png"
+			},
+			{
+				"pagePath": "pages/my/main",
+				"text": "我的",
+				"iconPath": "images/mine.png",
+				"selectedIconPath": "images/mine_hl.png"
+			}
+		]
+	},
+	"debug": true
+}

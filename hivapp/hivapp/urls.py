@@ -19,11 +19,11 @@ from hiv import views
 
 urlpatterns = [
     #url(r'^wx/', admin.site.urls),
-    url(r'^auth/user/api/rd3',views.renderTemplate.get_rd3_userinfo, name='rd3'),
-    url(r'^weixin/login/?action=post_code',views.renderTemplate.getcode, name='code'),
-    url(r'^pulics/login',views.renderTemplate.login, name='login'),
-    url(r'^pulics/time', views.renderTemplate.GenerateTime, name='time'),
-    url(r'^publics/place',views.renderTemplate.GenetePlace, name='place'),
-    url(r'^auth/user/chat_room',views.renderTemplate.chat_room, name='chat_room'),
-    url(r'^auth/user/me',views.renderTemplate.me, name='me'),
+    url(r'^auth/user/api/rd3',views.get_rd3_userinfo, name='rd3'),
+    url(r'^/login',views.login, name='code'),
+    #url(r'^pulics/login',views.ogin, name='login'),
+    url(r'^pulics/time', views.GenerateTime, name='time'),
+    url(r'^publics/place',views.GenetePlace, name='place'),
+    url(r'^auth/user/chat_room',views.chat_room, name='chat_room'),
+    url(r'^auth/user/me',views.me, name='me'),
 ]
