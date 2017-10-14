@@ -22,10 +22,13 @@ class getUserInfo(object):
         self.api = WXAPPAPI(appid=self.appid, app_secret=self.secret)
 
     # 获取从客户端请求的code
-    def GetCode(self, request):
-        if request.method == "GET":
+    @csrf_exempt
+    def GetCode(request):
+        if request.method == "POST":
             #if request.GET['action'] == 'post_code':
-            code = request.GET.get('code', None)
+            # for key in request.POST:
+            #     print(key)
+            code = request.POST.get('code', 'code_error')
             return code
 
     # 使用code换取session_key
@@ -37,25 +40,28 @@ class getUserInfo(object):
             raise Unauthorized(e.code, e.description)
 
         session_key = session_info.get('session_key')
-        return session_key
+        openid = session_info.get('openId')
+        #print(session_key)
+        return session_key, openid
 
-    # 获取openid
-    def GetOpenId(self, code):
-
-        # 获取openid并与数据库中的账户比对判断是否注册
-        api = self.api
-        openid_info = api.exchange_code_for_session_key(code=code)
-        openid = openid_info.get('openId')
-        return openid
+    # # 获取openid
+    # def GetOpenId(self, code):
+    #
+    #     # 获取openid并与数据库中的账户比对判断是否注册
+    #     api = self.api
+    #     openid_info = api.exchange_code_for_session_key(code=code)
+    #     openid = openid_info.get('openId')
+    #     #print(openid)
+    #     return openid
 
     # 从session_info解密得到用户信息
-    def UserInfomation(self, request, session_key):
+    def UserInfomation(request, session_key):
 
-        if request.method == "GET":
-            encrypted_data = request.POST.get('encryptedData')
+        if request.method == "POST":
+            encrypted_data = request.POST.get('encrypted_data')
             iv = request.POST.get('iv')
-            #signature = request.POST.get('signature')
-            crypt = WXBizDataCrypt(self.appid, session_key)
+            signature = request.POST.get('signature')
+            crypt = WXBizDataCrypt(settings.WXAPP_ID, session_key)
 
             user_info = crypt.decrypt(encrypted_data, iv)
             openid = user_info.get('openId')
@@ -68,7 +74,7 @@ class getUserInfo(object):
             vatarUrl = user_info.get('vatarUrl')
             id = randint(1,999999999999999)
             user_info_dict = {'nickname': nickname, 'gender': gender, 'language': language, 'city': city,
-                              'province': province, 'country': country, 'vatarUrl': vatarUrl, 'id': id}
+                              'province': province, 'country': country, 'vatarUrl': vatarUrl, 'id': id, 'openid':openid}
             if request.method == "POST":
                 approach = request.POST.get('auth_approach')
             if approach == 'wxapp':
@@ -80,7 +86,7 @@ class getUserInfo(object):
 
 
     # 新用户创建rd3验证码
-    def Generate3rd(request, session_key, user_info_dict, openid):
+    def Generate3rd(request, session_key, user_info_dict):
 
         payload = {
             "iss": settings.ISS,
@@ -92,10 +98,10 @@ class getUserInfo(object):
         }
         rd3 = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
         if rd3:
-            session_dict = {'session_key': session_key, 'openid': openid, 'rd3': rd3}
-            SessionInfo.objects.create(session_dict)
-            loggers = logger.LogIntoConsole()
-            loggers.info('订单生成成功！')
+            # session_dict = {'session_key': session_key, 'openid': user_info_dict['openid'], 'rd3': rd3}
+            # SessionInfo.objects.create(session_dict)
+            # loggers = logger.LogIntoConsole()
+            # loggers.info('订单生成成功！')
             token = {'access_rd3': rd3, 'account_id': user_info_dict['id']}
             return token
 

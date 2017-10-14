@@ -12,7 +12,7 @@ App({
           if (loginRes.code) {
             wx.getUserInfo({
               success: function (res) {
-                svr.http.get("/login", true,
+                svr.http.post("/login", true,
                   function (payload) {
                     wx.setStorageSync("player_login_token", payload);
                   },

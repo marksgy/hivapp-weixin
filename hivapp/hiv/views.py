@@ -7,15 +7,21 @@ from hiv.tools.exception import Unauthorized
 from hiv.models import OrderInfo
 from hiv.tools import mapfunc
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 
+def index(request):
+    return render(request, 'home.html')
+
+@csrf_exempt
 def login(request):
     code = getUserInfo.GetCode(request)
-    session_key = getUserInfo.GetSessionKey(code)
-    openid = getUserInfo.GetOpenId(code)
+    session_key, openid = getUserInfo.GetSessionKey(code)
     user_info_dict = getUserInfo.UserInfomation(request, session_key)
-    token = getUserInfo.Generate3rd(session_key, user_info_dict, openid)
+    token = getUserInfo.Generate3rd(session_key, user_info_dict)
     return JsonResponse(token)
+
 
 def choice(request):
 
@@ -52,3 +58,4 @@ def GenerateOrder(request):
         loggers = logger.LogIntoConsole()
         loggers.info('订单生成成功！')
     return True, HttpResponse(200)
+

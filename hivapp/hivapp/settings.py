@@ -20,9 +20,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'https://39927783.qcloud.la','118.89.146.122']
 
 
 # Application definition
@@ -118,8 +118,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # weixinapp addtion
-WXAPP_ID = 'wxc066d762e4dd7357'
-WXAPP_SECRET = '7bba3ab00edb1c153139f3d75a0020ed'
+WXAPP_ID = ''
+WXAPP_SECRET = ''
 WXAPP_TOKE = ''
 GRANT_TYPE = 'authorization_code'
 

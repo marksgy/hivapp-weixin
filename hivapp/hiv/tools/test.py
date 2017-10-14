@@ -1,25 +1,11 @@
-import jwt
-import time
-import logging
-#from untitled.untitled import settings
-SECRET_KEY = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCIE6a1NyEFe7qCDFrvWFZiAlY1ttE5596w5dLjNSaHlKGv8AXbKg/f8yKY9fKAJ5BKoeWEkPPjpn1t9QQAZYzqH9KNOFigMU8pSaRUxjI2dDvwmu8ZH6EExY+RfrPjQGmeliK18iFzFgBtf0eH3NAW3Pf71OZZz+cuNnVtE9lrYQIDAQAB"
-#session_key = 1
-user_info_dict = {'nickname': 'nickname', 'gender': 'gender', 'language': 'language', 'city': 'city',
-                  'province': 'province','country': 'country', 'vatarUrl': 'vatarUrl', 'id': 24324}
-#openid = 'sfsdfjpdosj'
-payload = {
-    #"iss": settings.ISS,
-    "iat": int(time.time()),
-    "exp": int(time.time()) + 86400 * 31,
-    # "aud": settings.AUDIENCE,
-    #'id': user_info_dict['id'],
-    "nickname": user_info_dict['nickname'],
-}
-rd3 = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
-print(rd3)
-if rd3:
-    #session_dict = {'session_key': session_key, 'openid': openid, 'rd3': rd3}
-    #SessionInfo.objects.create(session_dict)
-    #logging.log('请求rd3成功!')
-    token = {'access_rd3': rd3, 'account_id': user_info_dict['id']}
-    print(token)
+import requests
+import json
+
+url = 'http://127.0.0.1:8000/login'
+s = {'code': "003blGnd0LyAhv1GFapd0u3Jnd0blGnp",
+     'encrypt_data': "4k3Ox84qT4t09xKYYt9GNOyi0bXt/6o9IP97l4BJi4EXrAq6TWjEMt6d0s4cICj7CWk0EhndQAx7NGpCm2h1SChAYIZRyCJqdmeO3uXa/06hrRqXL62LUUKrY05hrwkFUfEkwNuynPD7LuMGWosuawJr3psJ95fkObgsIMP098HyW63HvfAlEXD9G38qw5oijXUea1Di5z5bMesdgnf2t4dLIQghgFfuXU857NQpqJiFqfYbcjRvWKaY4k1SV0OsqwhedUqOp2TjmBlAdh66fvtBGpH7mkLLpryPhAePY+cLrtfwE/7xDh6ohTkQMhCji2wqRiE57ocd7M7Xr6rhUrK7XyYQ3noWHKV25MDP/j5GP/SRYCAt86k6i2JA8H6EzXssVKRUhMvsf2pSr50xVcVV1dZXzwSqtMjuOZA1y12avkeWZapOCU7DKk+NY0cumVdWK/Jbvhn7CN1l+ftO+Q==",
+     'iv':"J6X217ESxWWH4Bch+2Ss+Q==",
+     }
+headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+r = requests.post(url, data=s, headers=headers)
+print(r.text)
