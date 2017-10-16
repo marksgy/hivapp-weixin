@@ -7,7 +7,7 @@ import jwt
 from random import randint
 
 
-code = "003gL8wj2kPFSI0Qbhvj2PmWvj2gL8wc"
+code = "003ArLh01OFWh22zW8i01XTGh01ArLhB"
 WXAPP_ID = 'wxc066d762e4dd7357'
 WXAPP_SECRET = '7bba3ab00edb1c153139f3d75a0020ed'
 WXAPP_TOKE = ''
@@ -24,7 +24,7 @@ api = WXAPPAPI(appid=appid, app_secret=secret)
 api = api
 
 session_info = api.exchange_code_for_session_key(code=code)
-
+print(session_info)
 session_key = session_info.get('session_key')
 openid = session_info.get('openId')
 print(session_key)

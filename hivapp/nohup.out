@@ -1,0 +1,44 @@
+10384:C 14 Oct 22:04:27.611 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 3.2.0 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 10384
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+10384:M 14 Oct 22:04:27.621 # Server started, Redis version 3.2.0
+10384:M 14 Oct 22:04:27.622 * The server is now ready to accept connections on port 6379
+2017-10-14 14:04:48,248 - INFO - runworker - Using single-threaded worker.
+2017-10-14 14:04:48,248 - INFO - runworker - Running worker against channel layer default (asgi_redis.core.RedisChannelLayer)
+2017-10-14 14:04:48,249 - INFO - worker - Listening on channels http.request, websocket.connect, websocket.disconnect, websocket.receive
+10384:M 14 Oct 22:09:28.033 * 100 changes in 300 seconds. Saving...
+10384:M 14 Oct 22:09:28.035 * Background saving started by pid 10607
+10607:C 14 Oct 22:09:28.037 * DB saved on disk
+10384:M 14 Oct 22:09:28.138 * Background saving terminated with success
+10384:M 14 Oct 22:14:29.096 * 100 changes in 300 seconds. Saving...
+10384:M 14 Oct 22:14:29.097 * Background saving started by pid 10702
+10702:C 14 Oct 22:14:29.099 * DB saved on disk
+10384:M 14 Oct 22:14:29.199 * Background saving terminated with success
+10384:M 14 Oct 22:19:30.064 * 100 changes in 300 seconds. Saving...
+10384:M 14 Oct 22:19:30.065 * Background saving started by pid 10868
+10868:C 14 Oct 22:19:30.068 * DB saved on disk
+10384:M 14 Oct 22:19:30.168 * Background saving terminated with success
+10384:M 14 Oct 22:24:31.088 * 100 changes in 300 seconds. Saving...
+10384:M 14 Oct 22:24:31.088 * Background saving started by pid 11033
+11033:C 14 Oct 22:24:31.091 * DB saved on disk
+10384:M 14 Oct 22:24:31.188 * Background saving terminated with success
+10384:M 14 Oct 22:29:32.033 * 100 changes in 300 seconds. Saving...
+10384:M 14 Oct 22:29:32.034 * Background saving started by pid 11185
+11185:C 14 Oct 22:29:32.036 * DB saved on disk
+10384:M 14 Oct 22:29:32.134 * Background saving terminated with success

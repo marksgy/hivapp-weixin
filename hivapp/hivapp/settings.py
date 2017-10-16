@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'hiv',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -98,6 +99,17 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgi_redis.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+        },
+        "ROUTING": "hiv.routing.channel_routing",
+    },
+}
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
@@ -118,12 +130,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # weixinapp addtion
-<<<<<<< HEAD
-WXAPP_ID = ''
-=======
 WXAPP_ID = 'wxc066d762e4dd7357'
->>>>>>> origin/master
-WXAPP_SECRET = ''
+WXAPP_SECRET = '‘
 WXAPP_TOKE = ''
 GRANT_TYPE = 'authorization_code'
 

@@ -16,10 +16,13 @@ def index(request):
 
 @csrf_exempt
 def login(request):
+    # if request.method == "POST":
+    #     code = request.POST.get('code', 'code_error')
     code = getUserInfo.GetCode(request)
     session_key, openid = getUserInfo.GetSessionKey(code)
     user_info_dict = getUserInfo.UserInfomation(request, session_key)
     token = getUserInfo.Generate3rd(session_key, user_info_dict)
+    token = {'code': code}
     return JsonResponse(token)
 
 

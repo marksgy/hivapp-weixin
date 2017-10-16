@@ -14,45 +14,29 @@ from hiv.tools import logger
 @csrf_exempt
 class getUserInfo(object):
 
-    # 初始化微信程序
-    def __init__(self):
-        self.appid = settings.WXAPP_ID
-        self.secret = settings.WXAPP_SECRET
-        self.grant_type = settings.GRANT_TYPE
-        self.api = WXAPPAPI(appid=self.appid, app_secret=self.secret)
 
     # 获取从客户端请求的code
     @csrf_exempt
     def GetCode(request):
         if request.method == "POST":
-            #if request.GET['action'] == 'post_code':
-            # for key in request.POST:
-            #     print(key)
             code = request.POST.get('code', 'code_error')
             return code
 
     # 使用code换取session_key
-    def GetSessionKey(self, code):
-        api = self.api
+    def GetSessionKey(code):
+        appid = settings.WXAPP_ID
+        secret = settings.WXAPP_SECRET
+        api = WXAPPAPI(appid=appid, app_secret=secret)
         try:
             session_info = api.exchange_code_for_session_key(code=code)
         except OAuth2AuthExchangeError as e:
             raise Unauthorized(e.code, e.description)
 
         session_key = session_info.get('session_key')
-        openid = session_info.get('openId')
-        #print(session_key)
+        openid = session_info.get('openid')
+        print(openid)
+        print(session_key)
         return session_key, openid
-
-    # # 获取openid
-    # def GetOpenId(self, code):
-    #
-    #     # 获取openid并与数据库中的账户比对判断是否注册
-    #     api = self.api
-    #     openid_info = api.exchange_code_for_session_key(code=code)
-    #     openid = openid_info.get('openId')
-    #     #print(openid)
-    #     return openid
 
     # 从session_info解密得到用户信息
     def UserInfomation(request, session_key):
@@ -98,10 +82,10 @@ class getUserInfo(object):
         }
         rd3 = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
         if rd3:
-            # session_dict = {'session_key': session_key, 'openid': user_info_dict['openid'], 'rd3': rd3}
-            # SessionInfo.objects.create(session_dict)
-            # loggers = logger.LogIntoConsole()
-            # loggers.info('订单生成成功！')
+            session_dict = {'session_key': session_key, 'openid': user_info_dict['openid'], 'rd3': rd3}
+            SessionInfo.objects.create(session_dict)
+            loggers = logger.LogIntoConsole()
+            loggers.info('订单生成成功！')
             token = {'access_rd3': rd3, 'account_id': user_info_dict['id']}
             return token
 
