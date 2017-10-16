@@ -131,7 +131,11 @@ STATIC_URL = '/static/'
 
 # weixinapp addtion
 WXAPP_ID = 'wxc066d762e4dd7357'
+<<<<<<< HEAD
 WXAPP_SECRET = '‘
+=======
+WXAPP_SECRET = ''
+>>>>>>> origin/master
 WXAPP_TOKE = ''
 GRANT_TYPE = 'authorization_code'
 
