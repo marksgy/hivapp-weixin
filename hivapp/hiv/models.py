@@ -22,7 +22,7 @@ class UserInfo(models.Model):
     city = models.CharField(max_length=20)
     province = models.CharField(max_length=20)
     country = models.CharField(max_length=20)
-    vatarUrl = models.CharField(max_length=200)
+    avatarUrl = models.CharField(max_length=200)
     time = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

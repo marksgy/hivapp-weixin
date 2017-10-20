@@ -49,16 +49,16 @@ class getUserInfo(object):
 
             user_info = crypt.decrypt(encrypted_data, iv)
             openid = user_info.get('openId')
-            nickname = user_info.get('nickname')
+            nickname = user_info.get('nickName')
             gender = user_info.get('gender')
             language = user_info.get('language')
             city = user_info.get('city')
             province = user_info.get('province')
             country = user_info.get('country')
-            vatarUrl = user_info.get('vatarUrl')
+            avatarUrl = user_info.get('avatarUrl')
             id = randint(1,999999999999999)
             user_info_dict = {'nickname': nickname, 'gender': gender, 'language': language, 'city': city,
-                              'province': province, 'country': country, 'vatarUrl': vatarUrl, 'id': id, 'openid':openid}
+                              'province': province, 'country': country, 'avatarUrl': avatarUrl, 'id': id, 'openid':openid}
             if request.method == "POST":
                 approach = request.POST.get('auth_approach')
             if approach == 'wxapp':
